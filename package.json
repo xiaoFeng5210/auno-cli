@@ -22,7 +22,9 @@
   },
   "homepage": "https://github.com/xiaoFeng5210/typescript-node-cli#readme",
   "devDependencies": {
+    "@types/eslint": "^8.56.2",
     "@types/node": "^20.11.10",
+    "eslint": "^8.56.0",
     "tsup": "^8.0.1",
     "typescript": "^5.3.3"
   },

@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises'
+import { lintCode } from '../utils/lint'
 
 export async function createPackageFile(rootDir: string) {
   const content = `
@@ -22,6 +23,7 @@ export async function createPackageFile(rootDir: string) {
         "typescript": "^5.3.3"
       }
     }
-  `
+  `;
+  // const code = await lintCode(content.trim()).catch(err => {throw err})
   await fs.writeFile(`${rootDir}/package.json`, content.trim())
 }
