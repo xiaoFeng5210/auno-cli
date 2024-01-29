@@ -13,9 +13,15 @@ export async function createNodeProject(dir: string) {
     console.warn('The directory already delete')
   }
   fs.mkdirSync(rootDir)
-  await createIndexFile(rootDir)
-  await createTsconfig(rootDir)
-  await createPackageFile(rootDir)
+  fs.mkdirSync(`${rootDir}/src`)
+  fs.mkdirSync(`${rootDir}/assets`)
+  await createBase(rootDir)
+}
+
+async function createBase(dir: string) {
+  await createIndexFile(dir)
+  await createTsconfig(dir)
+  await createPackageFile(dir)
 }
 
 function getTemplateDir() {
