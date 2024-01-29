@@ -1,9 +1,7 @@
 import fs from 'node:fs'
 import { createIndexFile, createTsconfig } from './src'
 
-main()
-
-
+// main()
 async function main() {
   const rootDir = getTemplateDir()
 
@@ -15,6 +13,10 @@ async function main() {
   fs.mkdirSync(rootDir)
   await createIndexFile(rootDir)
   await createTsconfig(rootDir)
+}
+
+export async function createProject(rootDir: string) {
+  console.log(`创建项目${rootDir}`)
 }
 
 
