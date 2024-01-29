@@ -2,7 +2,8 @@
   "name": "typescript-node-cli",
   "version": "0.0.1",
   "description": "编写一个可以执行ts文件的node cli工具，使用tsup打包。方便用户快速创建一个ts node项目",
-  "main": "index.js",
+  "main": "auno.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/xiaoFeng5210/typescript-node-cli/issues"
   },
-  "homepage": "https://github.com/xiaoFeng5210/typescript-node-cli#readme"
+  "homepage": "https://github.com/xiaoFeng5210/typescript-node-cli#readme",
+  "devDependencies": {
+    "tsup": "^8.0.1"
+  }
 }
