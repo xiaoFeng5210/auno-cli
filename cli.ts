@@ -9,7 +9,6 @@ const cli = cac('auno').version(version).help()
 cli.command('create <project>', 'start create new project')
   .option('--template <template>', 'choose a template', { default: 'node' })
   .action((project, options) => {
-    console.log(project, options)
     if (options.template === 'node') {
       if (project) {
         createNodeProject(project)
@@ -17,4 +16,4 @@ cli.command('create <project>', 'start create new project')
     }
   })
 
-const parsed = cli.parse()
+cli.parse()
