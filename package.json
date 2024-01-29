@@ -19,6 +19,6 @@
   },
   "homepage": "https://github.com/xiaoFeng5210/typescript-node-cli#readme",
   "devDependencies": {
-    "tsup": "^8.0.1"
+    "typescript": "^5.3.3"
   }
 }
