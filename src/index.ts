@@ -1,1 +1,3 @@
-console.log(1)
+import {createIndexFile} from './createIndexFile'
+
+export {createIndexFile}

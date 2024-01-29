@@ -2,8 +2,8 @@
   "compilerOptions": {
     "outDir": "dist",
     "target": "ESNext" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
-    "module": "nodenext" /* Specify what module code is generated. */,
-    // "esModuleInterop": true,
-    "moduleResolution": "nodenext",
+    "module": "esnext" /* Specify what module code is generated. */,
+    "esModuleInterop": true,
+    "moduleResolution": "Node",
   }
 }
