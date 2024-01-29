@@ -1,10 +1,12 @@
 import fs from 'node:fs'
 import { createIndexFile, createTsconfig } from './src'
 
-// main()
 async function main() {
-  const rootDir = getTemplateDir()
+  
+}
 
+export async function createNodeProject(dir: string) {
+  const rootDir = dir ? dir : getTemplateDir()
   if (fs.existsSync(getTemplateDir())) {
     // 删除文件夹
     fs.rmSync(rootDir, { recursive: true, force: true });
@@ -14,13 +16,6 @@ async function main() {
   await createIndexFile(rootDir)
   await createTsconfig(rootDir)
 }
-
-export async function createProject(rootDir: string) {
-  console.log(`创建项目${rootDir}`)
-}
-
-
-
 
 function getTemplateDir() {
   return 'auno-cli'

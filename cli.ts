@@ -1,6 +1,6 @@
 import cac from "cac";
 import path from "node:path"
-import { createProject } from './auno'
+import { createNodeProject } from './auno'
 
 const version = require('./package.json').version
 
@@ -12,7 +12,7 @@ cli.command('create <project>', 'start create new project')
     console.log(project, options)
     if (options.template === 'node') {
       if (project) {
-        createProject(project)
+        createNodeProject(project)
       }
     }
   })
