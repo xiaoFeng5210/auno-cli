@@ -1,10 +1,7 @@
 import fs from 'node:fs'
 import { createIndexFile, createTsconfig } from './src'
 
-
-
 main()
-
 
 
 async function main() {
