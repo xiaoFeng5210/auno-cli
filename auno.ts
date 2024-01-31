@@ -1,5 +1,5 @@
 import fs from 'node:fs'
-import { createIndexFile, createTsconfig, createPackageFile } from './src'
+import { createIndexFile, createTsconfig, createPackageFile, createTSup } from './src'
 
 async function main() {
   
@@ -22,6 +22,7 @@ async function createBase(dir: string) {
   await createIndexFile(dir)
   await createTsconfig(dir)
   await createPackageFile(dir)
+  createTSup(dir)
 }
 
 function getTemplateDir() {

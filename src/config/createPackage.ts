@@ -10,7 +10,7 @@ export async function createPackageFile(rootDir: string) {
       "main": "dist/index.js",
       "type": "module",
       "scripts": {
-        "watch": "tsup --format esm --watch",
+        "dev": "tsup --format esm --watch",
         "build": "tsup --format esm && tsup --dts",
         "dts": "tsup --dts"
       },
