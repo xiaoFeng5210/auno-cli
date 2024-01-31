@@ -41,7 +41,7 @@ var require_package = __commonJS({
         cac: "^6.7.14"
       },
       bin: {
-        auno: "bin/auno.js"
+        "auno-cli": "bin/auno.js"
       }
     };
   }
