@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "tsup --format esm --watch",
     "build": "tsup --format esm && tsup --dts",
-    "dts": "tsup --dts"
+    "dts": "tsup --dts",
+    "lint": "eslint --ext .ts src"
   },
   "repository": {
     "type": "git",

@@ -3,7 +3,7 @@ import { lintCode } from '../utils/lint'
 
 export async function createPackageFile(rootDir: string) {
   const content = `
-    {
+{
       "name": "${rootDir}",
       "version": "0.0.1",
       "description": "",
@@ -22,8 +22,7 @@ export async function createPackageFile(rootDir: string) {
         "tsup": "^8.0.1",
         "typescript": "^5.3.3"
       }
-    }
-  `;
-  // const code = await lintCode(content.trim()).catch(err => {throw err})
+}`;
+  const lintCode = JSON.stringify(content.trim(), null, 4)
   await fs.writeFile(`${rootDir}/package.json`, content.trim())
 }
