@@ -18,11 +18,17 @@ npx auno-cli create <projectName>
 cd projectName && npm install
 ```
 ## 自动编译
-项目启动后，编写ts文件即可自动编译成js文件到dist目录下
+编写ts文件即可自动编译成js文件到dist目录下
 ```bash
-npm run dev
+npm run tsup-watch
 or
-yarn dev
+yarn tsup-watch
+```
+
+## 项目便捷开发
+每次更新生成后的dist/index.js文件，nodemon会自动监听文件变化，自动执行dist/index.js文件
+```bash
+npm run start
 ```
 
 ## 项目打包
