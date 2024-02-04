@@ -95,7 +95,8 @@ async function createPackageFile(rootDir) {
       "main": "dist/index.js",
       "type": "module",
       "scripts": {
-        "dev": "tsup --format esm --watch",
+        "start": "nodemon --delay 1000ms dist/index.js",
+        "tsup-watch": "tsup --format esm --watch",
         "build": "tsup --format esm && tsup --dts",
         "dts": "tsup --dts"
       },
@@ -104,6 +105,7 @@ async function createPackageFile(rootDir) {
       "license": "ISC",
       "devDependencies": {
         "@types/node": "^20.11.10",
+        "nodemon": "^3.0.3",
         "tsup": "^8.0.1",
         "typescript": "^5.3.3"
       }
@@ -129,7 +131,6 @@ export default defineConfig({
 }
 
 // auno.ts
-console.log("Hello World90");
 async function createNodeProject(dir) {
   const rootDir = dir ? dir : getTemplateDir();
   if (fs4.existsSync(rootDir)) {

@@ -5,8 +5,6 @@ async function main() {
   
 }
 
-
-
 export async function createNodeProject(dir: string) {
   const rootDir = dir ? dir : getTemplateDir()
   if (fs.existsSync(rootDir)) {
