@@ -26,7 +26,7 @@ yarn tsup-watch
 ```
 
 ## 项目便捷开发
-每次更新生成后的dist/index.js文件，nodemon会自动监听文件变化，自动执行dist/index.js文件
+每次更新生成后的dist/index.js文件，nodemon会自动监听文件变化，自动执行dist/index.js文件。运行以下命令即可开启nodemon监听
 ```bash
 npm run start
 ```
