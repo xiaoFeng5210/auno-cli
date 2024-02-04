@@ -74,6 +74,7 @@ export default defineConfig({
 }
 
 // auno.ts
+console.log("Hello World90");
 async function createNodeProject(dir) {
   const rootDir = dir ? dir : getTemplateDir();
   if (fs4.existsSync(rootDir)) {

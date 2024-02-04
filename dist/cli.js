@@ -13,6 +13,7 @@ var require_package = __commonJS({
       main: "dist/cli.js",
       type: "module",
       scripts: {
+        start: "nodemon --delay 1000ms dist/auno.js",
         test: 'echo "Error: no test specified" && exit 1',
         watch: "tsup --format esm --watch",
         build: "tsup --format esm && tsup --dts",
@@ -34,6 +35,7 @@ var require_package = __commonJS({
         "@types/eslint": "^8.56.2",
         "@types/node": "^20.11.10",
         eslint: "^8.56.0",
+        nodemon: "^3.0.3",
         tsup: "^8.0.1",
         typescript: "^5.3.3"
       },
@@ -127,6 +129,7 @@ export default defineConfig({
 }
 
 // auno.ts
+console.log("Hello World90");
 async function createNodeProject(dir) {
   const rootDir = dir ? dir : getTemplateDir();
   if (fs4.existsSync(rootDir)) {

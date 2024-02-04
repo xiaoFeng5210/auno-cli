@@ -5,6 +5,10 @@ async function main() {
   
 }
 
+console.log('Hello World90')
+
+
+
 export async function createNodeProject(dir: string) {
   const rootDir = dir ? dir : getTemplateDir()
   if (fs.existsSync(rootDir)) {
