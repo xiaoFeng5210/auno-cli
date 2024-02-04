@@ -8,5 +8,4 @@ function main() {
 
 }`
   await fs.writeFile(`${dir}/index.ts`, fileContetnt)
-
 }

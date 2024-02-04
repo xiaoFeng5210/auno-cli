@@ -38,7 +38,8 @@ var require_package = __commonJS({
         typescript: "^5.3.3"
       },
       dependencies: {
-        cac: "^6.7.14"
+        cac: "^6.7.14",
+        fastify: "^4.26.0"
       },
       bin: {
         "auno-cli": "bin/auno.js"
