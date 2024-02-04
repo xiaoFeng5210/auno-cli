@@ -5,8 +5,6 @@ async function main() {
   
 }
 
-console.log('Hello World90')
-
 
 
 export async function createNodeProject(dir: string) {
