@@ -1,9 +1,18 @@
 import fs from 'node:fs'
 import { createIndexFile, createTsconfig, createPackageFile, createTSup } from './src'
+import { exec } from 'node:child_process';
 
 async function main() {
-  
+  exec('mkdir test-03', (err, stdout, stderr) => {
+    if (err) {
+      console.log(err)
+      return
+    }
+    console.log(stdout)
+  })
 }
+
+// main()
 
 export async function createNodeProject(dir: string) {
   const rootDir = dir ? dir : getTemplateDir()
