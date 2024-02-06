@@ -12,8 +12,8 @@ export async function createPackageFile(rootDir: string) {
       "scripts": {
         "start": "nodemon --delay 1000ms dist/index.js",
         "tsup-watch": "tsup --format esm --watch",
-        "build": "tsup --format esm && tsup --dts",
-        "dts": "tsup --dts"
+        "build": "tsup --format esm && tsup --dts --format esm",
+        "dts": "tsup --dts --format esm",
       },
       "keywords": [],
       "author": "",
