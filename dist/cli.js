@@ -16,8 +16,8 @@ var require_package = __commonJS({
         start: "nodemon --delay 1000ms dist/auno.js",
         test: 'echo "Error: no test specified" && exit 1',
         watch: "tsup --format esm --watch",
-        build: "tsup --format esm && tsup --dts",
-        dts: "tsup --dts",
+        build: "tsup --format esm && tsup --dts --format esm",
+        dts: "tsup --dts --format esm",
         lint: "eslint --ext .ts src"
       },
       repository: {

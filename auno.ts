@@ -1,12 +1,12 @@
 import fs from 'node:fs'
 import { createIndexFile, createTsconfig, createPackageFile, createTSup } from './src'
-import { exec } from 'node:child_process';
+import { exec, execFile, spawn } from 'node:child_process';
 
 async function main() {
-  exec('mkdir test-03', (err, stdout, stderr) => {
-    if (err) {
-      console.log(err)
-      return
+  exec('node -v', function(error, stdout, stderr) {
+    if (error) {
+      console.log(error)
+      process.exit(1)
     }
     console.log(stdout)
   })
