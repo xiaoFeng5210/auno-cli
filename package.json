@@ -16,7 +16,9 @@
     "type": "git",
     "url": "git+https://github.com/xiaoFeng5210/typescript-node-cli.git"
   },
-  "keywords": [],
+  "keywords": [
+    "tsup", "typescript", "node", "cli", "nodemon", "build", "cac"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
