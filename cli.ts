@@ -8,7 +8,7 @@ const cli = cac('auno').version(version).help()
 
 cli.command('create <project>', 'start create new project')
   .option('--template <template>', 'choose a template', { default: 'node' })
-  .action((project, options) => {
+  .action((project, options) => {  // 第一个参数project - 项目名称，第二个参数options - 选项
     if (options.template === 'node') {
       if (project) {
         createNodeProject(project)
