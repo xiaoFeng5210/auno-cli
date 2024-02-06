@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "nodemon --delay 1000ms dist/auno.js",
+    "local": "auno-cli create local",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "tsup --format esm --watch",
     "build": "tsup --format esm && tsup --dts --format esm",
