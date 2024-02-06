@@ -42,8 +42,8 @@ async function createPackageFile(rootDir) {
       "scripts": {
         "start": "nodemon --delay 1000ms dist/index.js",
         "tsup-watch": "tsup --format esm --watch",
-        "build": "tsup --format esm && tsup --dts",
-        "dts": "tsup --dts"
+        "build": "tsup --format esm && tsup --dts --format esm",
+        "dts": "tsup --dts --format esm",
       },
       "keywords": [],
       "author": "",
@@ -76,11 +76,49 @@ export default defineConfig({
 }
 
 // auno.ts
+import path from "node:path";
+async function main() {
+  renderTemplate("ts-node");
+}
+main();
+async function renderTemplate(templateRoot, target) {
+  const cwd = process.cwd();
+  const dirPathPrefix = path.resolve(cwd, "src/template");
+  const dirPath = path.join(dirPathPrefix, templateRoot);
+  fs4.readdir(dirPath, { withFileTypes: true }, (err, files) => {
+    readRoot(files);
+  });
+}
+function readRoot(files) {
+  for (let f of files) {
+    if (f.name !== "node_modules") {
+      if (f.isDirectory()) {
+        recursionDir(f.name, f.path);
+      } else {
+        const filePath = path.join(f.path, f.name);
+        console.log(filePath);
+      }
+    }
+  }
+}
+function recursionDir(dirName, dirPath) {
+  const currentDirPath = path.join(dirPath, dirName);
+  const child = fs4.readdirSync(currentDirPath, { withFileTypes: true });
+  if (Array.isArray(child) && child.length > 0) {
+    for (let c of child) {
+      if (c.isDirectory()) {
+        recursionDir(c.name, currentDirPath);
+      } else {
+        const filePath = path.join(currentDirPath, c.name);
+        console.log(filePath);
+      }
+    }
+  }
+}
 async function createNodeProject(dir) {
   const rootDir = dir ? dir : getTemplateDir();
   if (fs4.existsSync(rootDir)) {
     fs4.rmSync(rootDir, { recursive: true, force: true });
-    console.log("The directory already delete");
   }
   fs4.mkdirSync(rootDir);
   fs4.mkdirSync(`${rootDir}/src`);
@@ -97,6 +135,7 @@ function getTemplateDir() {
   return "auno-cli";
 }
 export {
-  createNodeProject
+  createNodeProject,
+  renderTemplate
 };
 //# sourceMappingURL=auno.js.map

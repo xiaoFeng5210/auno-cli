@@ -8,12 +8,13 @@ var require_package = __commonJS({
   "package.json"(exports, module) {
     module.exports = {
       name: "auno-cli",
-      version: "0.0.1",
+      version: "0.0.2",
       description: "\u7F16\u5199\u4E00\u4E2A\u53EF\u4EE5\u6267\u884Cts\u6587\u4EF6\u7684node cli\u5DE5\u5177\uFF0C\u4F7F\u7528tsup\u6253\u5305\u3002\u65B9\u4FBF\u7528\u6237\u5FEB\u901F\u521B\u5EFA\u4E00\u4E2Ats node\u9879\u76EE",
       main: "dist/cli.js",
       type: "module",
       scripts: {
         start: "nodemon --delay 1000ms dist/auno.js",
+        local: "auno-cli create local",
         test: 'echo "Error: no test specified" && exit 1',
         watch: "tsup --format esm --watch",
         build: "tsup --format esm && tsup --dts --format esm",
@@ -24,7 +25,15 @@ var require_package = __commonJS({
         type: "git",
         url: "git+https://github.com/xiaoFeng5210/typescript-node-cli.git"
       },
-      keywords: [],
+      keywords: [
+        "tsup",
+        "typescript",
+        "node",
+        "cli",
+        "nodemon",
+        "build",
+        "cac"
+      ],
       author: "",
       license: "ISC",
       bugs: {
@@ -97,8 +106,8 @@ async function createPackageFile(rootDir) {
       "scripts": {
         "start": "nodemon --delay 1000ms dist/index.js",
         "tsup-watch": "tsup --format esm --watch",
-        "build": "tsup --format esm && tsup --dts",
-        "dts": "tsup --dts"
+        "build": "tsup --format esm && tsup --dts --format esm",
+        "dts": "tsup --dts --format esm",
       },
       "keywords": [],
       "author": "",
@@ -131,11 +140,49 @@ export default defineConfig({
 }
 
 // auno.ts
+import path from "node:path";
+async function main() {
+  renderTemplate("ts-node");
+}
+main();
+async function renderTemplate(templateRoot, target) {
+  const cwd = process.cwd();
+  const dirPathPrefix = path.resolve(cwd, "src/template");
+  const dirPath = path.join(dirPathPrefix, templateRoot);
+  fs4.readdir(dirPath, { withFileTypes: true }, (err, files) => {
+    readRoot(files);
+  });
+}
+function readRoot(files) {
+  for (let f of files) {
+    if (f.name !== "node_modules") {
+      if (f.isDirectory()) {
+        recursionDir(f.name, f.path);
+      } else {
+        const filePath = path.join(f.path, f.name);
+        console.log(filePath);
+      }
+    }
+  }
+}
+function recursionDir(dirName, dirPath) {
+  const currentDirPath = path.join(dirPath, dirName);
+  const child = fs4.readdirSync(currentDirPath, { withFileTypes: true });
+  if (Array.isArray(child) && child.length > 0) {
+    for (let c of child) {
+      if (c.isDirectory()) {
+        recursionDir(c.name, currentDirPath);
+      } else {
+        const filePath = path.join(currentDirPath, c.name);
+        console.log(filePath);
+      }
+    }
+  }
+}
 async function createNodeProject(dir) {
   const rootDir = dir ? dir : getTemplateDir();
   if (fs4.existsSync(rootDir)) {
     fs4.rmSync(rootDir, { recursive: true, force: true });
-    console.log("The directory already delete");
   }
   fs4.mkdirSync(rootDir);
   fs4.mkdirSync(`${rootDir}/src`);
