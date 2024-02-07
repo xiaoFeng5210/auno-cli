@@ -1,5 +1,4 @@
-# auno-cli
-![Static Badge](https://img.shields.io/badge/build-nodejs-green) ![Static Badge](https://img.shields.io/badge/dev-ts_node-blue)
+# auno-cli ![Static Badge](https://img.shields.io/badge/build-nodejs-green) ![Static Badge](https://img.shields.io/badge/dev-ts_node-blue)
 
 
 
