@@ -78,7 +78,7 @@ export default defineConfig({
 // auno.ts
 import path from "node:path";
 async function main() {
-  renderTemplate("ts-node");
+  renderTemplate("ts-node", "test-render");
 }
 main();
 async function renderTemplate(templateRoot, target) {
@@ -86,31 +86,41 @@ async function renderTemplate(templateRoot, target) {
   const dirPathPrefix = path.resolve(cwd, "src/template");
   const dirPath = path.join(dirPathPrefix, templateRoot);
   fs4.readdir(dirPath, { withFileTypes: true }, (err, files) => {
-    readRoot(files);
+    readRootAndCopy(files, target);
   });
 }
-function readRoot(files) {
+function readRootAndCopy(files, target) {
+  if (fs4.existsSync(target)) {
+    fs4.rmSync(target, { recursive: true, force: true });
+  }
+  fs4.mkdirSync(target);
+  const targetRealPath = path.resolve(process.cwd(), target);
   for (let f of files) {
     if (f.name !== "node_modules") {
       if (f.isDirectory()) {
-        recursionDir(f.name, f.path);
+        fs4.mkdirSync(path.join(targetRealPath, f.name));
+        recursionDir(f.name, f.path, targetRealPath);
       } else {
         const filePath = path.join(f.path, f.name);
-        console.log(filePath);
+        const destPath = path.join(targetRealPath, f.name);
+        fs4.copyFileSync(filePath, destPath);
       }
     }
   }
 }
-function recursionDir(dirName, dirPath) {
+function recursionDir(dirName, dirPath, targetRealPath) {
   const currentDirPath = path.join(dirPath, dirName);
   const child = fs4.readdirSync(currentDirPath, { withFileTypes: true });
   if (Array.isArray(child) && child.length > 0) {
     for (let c of child) {
       if (c.isDirectory()) {
-        recursionDir(c.name, currentDirPath);
+        fs4.mkdirSync(path.join(targetRealPath, c.name));
+        recursionDir(c.name, currentDirPath, path.join(targetRealPath, c.name));
       } else {
-        const filePath = path.join(currentDirPath, c.name);
-        console.log(filePath);
+        console.log(targetRealPath);
+        const filePath = path.join(c.path, c.name);
+        const destPath = path.join(targetRealPath, c.name);
+        fs4.copyFileSync(filePath, destPath);
       }
     }
   }
