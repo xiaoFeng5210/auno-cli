@@ -106,17 +106,18 @@ function readRootAndCopy(files, target) {
   }
 }
 function recursionDir(dirName, dirPath, targetRealPath) {
-  const currentDirPath = path.join(dirPath, dirName);
-  const child = fs4.readdirSync(currentDirPath, { withFileTypes: true });
+  const needCopyDirPath = path.join(dirPath, dirName);
+  const targetDirPath = path.join(targetRealPath, dirName);
+  console.log(targetDirPath);
+  const child = fs4.readdirSync(needCopyDirPath, { withFileTypes: true });
   if (Array.isArray(child) && child.length > 0) {
     for (let c of child) {
       if (c.isDirectory()) {
         fs4.mkdirSync(path.join(targetRealPath, c.name));
-        recursionDir(c.name, currentDirPath, path.join(targetRealPath, c.name));
+        recursionDir(c.name, needCopyDirPath, targetDirPath);
       } else {
-        console.log(targetRealPath);
         const filePath = path.join(c.path, c.name);
-        const destPath = path.join(targetRealPath, c.name);
+        const destPath = path.join(targetDirPath, c.name);
         fs4.copyFileSync(filePath, destPath);
       }
     }

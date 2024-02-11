@@ -35,20 +35,20 @@ function readRootAndCopy(files: fs.Dirent[], target: string) {
 }
 
 function recursionDir(dirName: string, dirPath: string, targetRealPath: string) {
-  const currentDirPath = path.join(dirPath, dirName);
-  const child = fs.readdirSync(currentDirPath, { withFileTypes: true })
+  const needCopyDirPath = path.join(dirPath, dirName);
+  const targetDirPath = path.join(targetRealPath, dirName)
+  console.log(targetDirPath)
+  const child = fs.readdirSync(needCopyDirPath, { withFileTypes: true })
   if (Array.isArray(child) && child.length > 0) {
     for (let c of child) {
       if (c.isDirectory()) {
         // 在目标文件夹创建同名文件夹
         fs.mkdirSync(path.join(targetRealPath, c.name))
-        recursionDir(c.name, currentDirPath, path.join(targetRealPath, c.name))
+        recursionDir(c.name, needCopyDirPath, targetDirPath)
       }
       else {
-        console.log(targetRealPath)
         const filePath = path.join(c.path, c.name)
-        const destPath = path.join(targetRealPath, c.name)
-        
+        const destPath = path.join(targetDirPath, c.name)
         fs.copyFileSync(filePath, destPath)
       }
     }
