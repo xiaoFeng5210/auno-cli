@@ -37,8 +37,6 @@ function readRootAndCopy(files: fs.Dirent[], target: string) {
 function recursionDir(dirName: string, dirPath: string, parentPath: string) {
   const needCopyDirPath = path.join(dirPath, dirName);
   const destPath = path.join(parentPath, dirName)
-  console.log(needCopyDirPath)
-  console.log(destPath)
   const child = fs.readdirSync(needCopyDirPath, { withFileTypes: true })
   if (Array.isArray(child) && child.length > 0) {
     loopFileAndCopyToDest(child, needCopyDirPath, destPath)
@@ -49,7 +47,6 @@ function loopFileAndCopyToDest(child: fs.Dirent[], needCopyDirPath: string, dest
   for (let c of child) {
     if (c.isDirectory()) {
       // 在目标文件夹创建同名文件夹
-      console.log(destPath)
       fs.mkdirSync(path.join(destPath, c.name))
       recursionDir(c.name, needCopyDirPath, destPath)
     }

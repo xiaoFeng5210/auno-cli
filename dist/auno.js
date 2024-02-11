@@ -106,8 +106,6 @@ function readRootAndCopy(files, target) {
 function recursionDir(dirName, dirPath, parentPath) {
   const needCopyDirPath = path.join(dirPath, dirName);
   const destPath = path.join(parentPath, dirName);
-  console.log(needCopyDirPath);
-  console.log(destPath);
   const child = fs4.readdirSync(needCopyDirPath, { withFileTypes: true });
   if (Array.isArray(child) && child.length > 0) {
     loopFileAndCopyToDest(child, needCopyDirPath, destPath);
@@ -116,7 +114,6 @@ function recursionDir(dirName, dirPath, parentPath) {
 function loopFileAndCopyToDest(child, needCopyDirPath, destPath) {
   for (let c of child) {
     if (c.isDirectory()) {
-      console.log(destPath);
       fs4.mkdirSync(path.join(destPath, c.name));
       recursionDir(c.name, needCopyDirPath, destPath);
     } else {
