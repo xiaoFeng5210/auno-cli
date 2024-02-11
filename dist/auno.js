@@ -1,5 +1,5 @@
 // auno.ts
-import fs4 from "node:fs";
+import fs5 from "node:fs";
 
 // src/createIndexFile.ts
 import fs from "node:fs/promises";
@@ -75,12 +75,9 @@ export default defineConfig({
   writeFileSync(`${rootDir}/tsup.config.ts`, content.trim());
 }
 
-// auno.ts
+// src/utils/renderTemplate.ts
+import fs4 from "node:fs";
 import path from "node:path";
-async function main() {
-  renderTemplate("ts-node", "test-render");
-}
-main();
 async function renderTemplate(templateRoot, target) {
   const cwd = process.cwd();
   const dirPathPrefix = path.resolve(cwd, "src/template");
@@ -125,14 +122,20 @@ function recursionDir(dirName, dirPath, targetRealPath) {
     }
   }
 }
+
+// auno.ts
+async function main() {
+  renderTemplate("ts-node", "test-render");
+}
+main();
 async function createNodeProject(dir) {
   const rootDir = dir ? dir : getTemplateDir();
-  if (fs4.existsSync(rootDir)) {
-    fs4.rmSync(rootDir, { recursive: true, force: true });
+  if (fs5.existsSync(rootDir)) {
+    fs5.rmSync(rootDir, { recursive: true, force: true });
   }
-  fs4.mkdirSync(rootDir);
-  fs4.mkdirSync(`${rootDir}/src`);
-  fs4.mkdirSync(`${rootDir}/assets`);
+  fs5.mkdirSync(rootDir);
+  fs5.mkdirSync(`${rootDir}/src`);
+  fs5.mkdirSync(`${rootDir}/assets`);
   await createBase(rootDir);
 }
 async function createBase(dir) {
@@ -145,7 +148,6 @@ function getTemplateDir() {
   return "auno-cli";
 }
 export {
-  createNodeProject,
-  renderTemplate
+  createNodeProject
 };
 //# sourceMappingURL=auno.js.map
