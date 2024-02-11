@@ -98,30 +98,33 @@ function readRootAndCopy(files, target) {
         fs4.mkdirSync(path.join(targetRealPath, f.name));
         recursionDir(f.name, f.path, targetRealPath);
       } else {
-        const filePath = path.join(f.path, f.name);
-        const destPath = path.join(targetRealPath, f.name);
-        fs4.copyFileSync(filePath, destPath);
+        copyFileToDest(f.name, f.path, targetRealPath);
       }
     }
   }
 }
-function recursionDir(dirName, dirPath, targetRealPath) {
+function recursionDir(dirName, dirPath, parentPath) {
   const needCopyDirPath = path.join(dirPath, dirName);
-  const targetDirPath = path.join(targetRealPath, dirName);
-  console.log(targetDirPath);
+  const destPath = path.join(parentPath, dirName);
   const child = fs4.readdirSync(needCopyDirPath, { withFileTypes: true });
   if (Array.isArray(child) && child.length > 0) {
-    for (let c of child) {
-      if (c.isDirectory()) {
-        fs4.mkdirSync(path.join(targetRealPath, c.name));
-        recursionDir(c.name, needCopyDirPath, targetDirPath);
-      } else {
-        const filePath = path.join(c.path, c.name);
-        const destPath = path.join(targetDirPath, c.name);
-        fs4.copyFileSync(filePath, destPath);
-      }
+    loopFileAndCopyToDest(child, needCopyDirPath, destPath);
+  }
+}
+function loopFileAndCopyToDest(child, needCopyDirPath, destPath) {
+  for (let c of child) {
+    if (c.isDirectory()) {
+      fs4.mkdirSync(destPath);
+      recursionDir(c.name, needCopyDirPath, destPath);
+    } else {
+      copyFileToDest(c.name, needCopyDirPath, destPath);
     }
   }
+}
+function copyFileToDest(copyName, copyPath, targetPath) {
+  const filePath = path.join(copyPath, copyName);
+  const destPath = path.join(targetPath, copyName);
+  fs4.copyFileSync(filePath, destPath);
 }
 
 // auno.ts

@@ -26,31 +26,36 @@ function readRootAndCopy(files: fs.Dirent[], target: string) {
         recursionDir(f.name, f.path, targetRealPath)
       }
       else {
-        const filePath = path.join(f.path, f.name)
-        const destPath = path.join(targetRealPath, f.name)
-        fs.copyFileSync(filePath, destPath)
+        copyFileToDest(f.name, f.path, targetRealPath)
       }
     }
   }
 }
 
-function recursionDir(dirName: string, dirPath: string, targetRealPath: string) {
+function recursionDir(dirName: string, dirPath: string, parentPath: string) {
   const needCopyDirPath = path.join(dirPath, dirName);
-  const targetDirPath = path.join(targetRealPath, dirName)
-  console.log(targetDirPath)
+  const destPath = path.join(parentPath, dirName)
   const child = fs.readdirSync(needCopyDirPath, { withFileTypes: true })
   if (Array.isArray(child) && child.length > 0) {
-    for (let c of child) {
-      if (c.isDirectory()) {
-        // 在目标文件夹创建同名文件夹
-        fs.mkdirSync(path.join(targetRealPath, c.name))
-        recursionDir(c.name, needCopyDirPath, targetDirPath)
-      }
-      else {
-        const filePath = path.join(c.path, c.name)
-        const destPath = path.join(targetDirPath, c.name)
-        fs.copyFileSync(filePath, destPath)
-      }
+    loopFileAndCopyToDest(child, needCopyDirPath, destPath)
+  }
+}
+
+function loopFileAndCopyToDest(child: fs.Dirent[], needCopyDirPath: string, destPath: string) {
+  for (let c of child) {
+    if (c.isDirectory()) {
+      // 在目标文件夹创建同名文件夹
+      fs.mkdirSync(destPath)
+      recursionDir(c.name, needCopyDirPath, destPath)
+    }
+    else {
+      copyFileToDest(c.name, needCopyDirPath, destPath)
     }
   }
+}
+
+function copyFileToDest(copyName: string, copyPath: string, targetPath: string) {
+  const filePath = path.join(copyPath, copyName)
+  const destPath = path.join(targetPath, copyName)
+  fs.copyFileSync(filePath, destPath)
 }
