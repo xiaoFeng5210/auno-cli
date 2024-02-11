@@ -1,7 +1,9 @@
 import fs from 'node:fs'
 import path, { dirname } from 'node:path';
 
-export async function renderTemplate(templateRoot: string, target?: string) {
+export type TemplateRoot = 'ts-node' 
+
+export async function renderTemplate(templateRoot: TemplateRoot, target?: string) {
   const cwd = process.cwd()
   const dirPathPrefix = path.resolve(cwd, 'src/template')
   const dirPath = path.join(dirPathPrefix, templateRoot)
@@ -35,6 +37,8 @@ function readRootAndCopy(files: fs.Dirent[], target: string) {
 function recursionDir(dirName: string, dirPath: string, parentPath: string) {
   const needCopyDirPath = path.join(dirPath, dirName);
   const destPath = path.join(parentPath, dirName)
+  console.log(needCopyDirPath)
+  console.log(destPath)
   const child = fs.readdirSync(needCopyDirPath, { withFileTypes: true })
   if (Array.isArray(child) && child.length > 0) {
     loopFileAndCopyToDest(child, needCopyDirPath, destPath)
@@ -45,7 +49,8 @@ function loopFileAndCopyToDest(child: fs.Dirent[], needCopyDirPath: string, dest
   for (let c of child) {
     if (c.isDirectory()) {
       // 在目标文件夹创建同名文件夹
-      fs.mkdirSync(destPath)
+      console.log(destPath)
+      fs.mkdirSync(path.join(destPath, c.name))
       recursionDir(c.name, needCopyDirPath, destPath)
     }
     else {

@@ -1,6 +1,7 @@
 import cac from "cac";
 import path from "node:path"
 import { createNodeProject } from './auno'
+import { renderTemplate } from './src/utils/renderTemplate'
 
 const version = require('./package.json').version
 
@@ -11,7 +12,7 @@ cli.command('create <project>', 'start create new project')
   .action((project, options) => {  // 第一个参数project - 项目名称，第二个参数options - 选项
     if (options.template === 'node') {
       if (project) {
-        createNodeProject(project)
+        renderTemplate('ts-node', project)
       }
     }
   })
