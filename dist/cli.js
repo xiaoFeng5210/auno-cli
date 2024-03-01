@@ -8,7 +8,7 @@ var require_package = __commonJS({
   "package.json"(exports, module) {
     module.exports = {
       name: "auno-cli",
-      version: "0.0.2",
+      version: "0.0.5",
       description: "\u7F16\u5199\u4E00\u4E2A\u53EF\u4EE5\u6267\u884Cts\u6587\u4EF6\u7684node cli\u5DE5\u5177\uFF0C\u4F7F\u7528tsup\u6253\u5305\u3002\u65B9\u4FBF\u7528\u6237\u5FEB\u901F\u521B\u5EFA\u4E00\u4E2Ats node\u9879\u76EE",
       main: "dist/cli.js",
       type: "module",
