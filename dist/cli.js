@@ -62,7 +62,7 @@ var require_package = __commonJS({
 // cli.ts
 import cac from "cac";
 
-// src/utils/renderTemplate.ts
+// src/lib/renderTemplate.ts
 import fs from "node:fs";
 import path from "node:path";
 async function renderTemplate(templateRoot, target) {

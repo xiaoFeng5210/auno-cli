@@ -1,7 +1,9 @@
+/**
+ * * 命令行相关程序主逻辑
+ */
 import cac from "cac";
 import path from "node:path"
-import { createNodeProject } from './auno'
-import { renderTemplate } from './src/utils/renderTemplate'
+import { renderTemplate } from './src/lib/renderTemplate'
 
 const version = require('./package.json').version
 

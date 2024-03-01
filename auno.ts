@@ -1,12 +1,10 @@
-import fs from 'node:fs'
-import { createIndexFile, createTsconfig, createPackageFile, createTSup } from './src'
-import { exec, execFile, spawn } from 'node:child_process';
-import path, { dirname } from 'node:path';
-import { renderTemplate } from './src/utils/renderTemplate'
+import { renderTemplate } from './src/lib/renderTemplate'
 
-// test
+/**
+ * 命令行的相关逻辑可以通过这里进行测试
+ */
 async function main() {
-  renderTemplate('ts-node', 'test-render')
+  renderTemplate('ts-node', 'playground')
 }
 
-// main()
+main()
